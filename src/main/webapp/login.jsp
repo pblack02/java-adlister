@@ -1,34 +1,42 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: presleyblack
+  Date: 8/23/23
+  Time: 12:20 PM
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%
-    if (request.getMethod().equalsIgnoreCase("post")) {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        if (username.equals("admin") && password.equals("password")) {
-            response.sendRedirect("/profile");
-        }
-    }
-%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%! String username; %>
+<%! String password; %>
 <html>
 <head>
-    <jsp:include page="partials/head.jsp">
-        <jsp:param name="title" value="Please Log In" />
-    </jsp:include>
+    <title>Title</title>
 </head>
 <body>
-    <jsp:include page="partials/navbar.jsp" />
-    <div class="container">
-        <h1>Please Log In</h1>
-        <form action="/login.jsp" method="POST">
-            <div class="form-group">
-                <label for="username">Username</label>
-                <input id="username" name="username" class="form-control" type="text">
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input id="password" name="password" class="form-control" type="password">
-            </div>
-            <input type="submit" class="btn btn-primary btn-block" value="Log In">
-        </form>
-    </div>
+   <div class="container">
+       <%@include file="partials/navbar.jsp"%>
+       <div style="text-align: center">
+           <h1>Welcome please login</h1>
+           <div style="text-align: center">
+               <form action="${pageContext.request.contextPath}/login.jsp" method="POST">
+                   <label for="username">Username</label>
+                   <input type="text" id="username" name="username" size="30">
+                   <br>
+                   <label type="password" for="password">Password</label>
+                   <input id="password" type="password" name="password" size="30">
+                   <br>
+                   <button type="submit">Login</button>
+               </form>
+           </div>
+       </div>
+   </div>
+    <c:if test="${param.username.equals('admin') && param.password.equals('password')}">
+        <%response.sendRedirect("/profile.jsp");%>
+    </c:if>
 </body>
 </html>
+
+
+
