@@ -3,6 +3,13 @@ package com.codeup.adlister.models;
 public class User {
     private long id;
     private String username;
+
+    public User(String username, String email, String password) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
+
     private String email;
     private String password;
 
